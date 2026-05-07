@@ -1,0 +1,12 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY server/package*.json ./server/
+COPY package*.json ./
+RUN npm ci --prefix server
+
+COPY server ./server
+
+EXPOSE 4000
+CMD ["node", "server/src/index.js"]
